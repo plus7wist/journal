@@ -1,37 +1,35 @@
-## Welcome to GitHub Pages
+# 日志
 
-You can use the [editor on GitHub](https://github.com/plus7wist/journal/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+## 2020年 07月 17日 星期五 16:32:29 CST
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```rust
+impl<T> Vec<T> {
+    /// Shortens the vector, keeping the first len elements and dropping the
+    /// rest.
+    /// Note that this method has no effect on the allocated capacity of the
+    /// vector.
+    pub fn truncate(&mut self, len: usize)
+}
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## 2020年 07月 17日 星期五 15:01:11 CST
 
-### Jekyll Themes
+从 `&[u32]` 中复制最后一个元素，得到 `Option<u32>`。
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/plus7wist/journal/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+```rust
+fn slice_last(slice: &[u32]) -> Option<u32> {
+    slice.last().copied()
+}
+```
 
-### Support or Contact
+用到的方法是：
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+```rust
+impl<T> for <T> {
+    pub fn last(&self) -> Option<&T>
+}
+
+impl <'_, T> Option<&'_ T> where T: Copy {
+    pub fn copied(self) -> Option<T>
+}
+```
