@@ -1,4 +1,11 @@
-# 日志
+## 2020年 07月 17日 星期五 17:54:14 CST
+
+```
+        Vec<T>      &[T]    Box<[T]>
+Vec<T>              &x[..]  x.into_boxed_slice()
+&[T]    x.to_vec()          Box::new(*x)
+Box<T>  x.to_vec()  &*x
+```
 
 ## 2020年 07月 17日 星期五 16:32:29 CST
 
