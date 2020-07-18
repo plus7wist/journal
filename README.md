@@ -1,3 +1,13 @@
+# 日志
+
+## 2020年 07月 18日 星期六 17:54:03 CST
+
+date 工具的默认格式受 locale 影响。例如当前主要语言设置的是 C，想要输出简体中文
+日期时，首先编辑 /etc/locale.gen，打开 zh_CN.UTF-8 的开关。再运行 locale-gen 工
+具，最后用 LANG 环境变量控制 date。
+
+    env LANG=zh_CN.UTF-8 date
+
 ## 2020年 07月 17日 星期五 19:54:24 CST
 
 `dev-dependencies` 的依赖不会用在打包中，但会用在功能测试、示例和基准测试里。
