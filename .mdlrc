@@ -1,2 +1,1 @@
-rules "~MD013"
-rules "~MD002"
+rules "~MD013,~MD022,~MD033"

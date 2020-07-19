@@ -1,12 +1,44 @@
 # 日志
 
+## 2020年 07月 19日 星期日 15:06:36 CST
+
+Rust 的 &str 实现了 ToString，str 也实现了 ToString，但前者是因为下面这一串实现
+。
+
+```rust
+impl Display for str {}
+impl<'_, T> Display for &'_ T where T: Display + ?Sized {}
+impl<T> ToString for T where T: Display + ?Sized {}
+```
+
+也就是最后依赖为 str 实现的 Display::fmt 来创造字符串的。相比较而言后者的效率自
+然会更高。
+
+例如 s 是 &&str，那么 s.to_string() 会调用 &str 的实现，为此写成
+(*s).to_string()，调用 str 的实现更好一些。cargo clippy 可以找到第一种写法，给
+出一个警告。
+
+## 2020年 07月 18日 星期六 19:16:54 CST
+
+tmux 的默认 shell 受配置文件控制。例如要使用 fish，需要以下配置：
+
+```
+set -g default-command /usr/local/bin/fish
+set -g default-shell /usr/local/bin/fish
+```
+
+注意，修改配置之后，需要关闭所有会话，新的配置才能起效。如果不在意其他会话的工
+作的话，可以用 tmux kill-server 杀死所有会话。
+
 ## 2020年 07月 18日 星期六 17:54:03 CST
 
 date 工具的默认格式受 locale 影响。例如当前主要语言设置的是 C，想要输出简体中文
 日期时，首先编辑 /etc/locale.gen，打开 zh_CN.UTF-8 的开关。再运行 locale-gen 工
 具，最后用 LANG 环境变量控制 date。
 
-    env LANG=zh_CN.UTF-8 date
+```
+env LANG=zh_CN.UTF-8 date
+```
 
 ## 2020年 07月 17日 星期五 19:54:24 CST
 
