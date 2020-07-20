@@ -1,5 +1,21 @@
 # 日志
 
+## 2020年 07月 20日 星期一 17:47:45 CST
+
+我想实现一个 MapInto trait，为所有可能的情况实现 iterator.map\_into()，相当于
+iterator.map(|item| item.into())，但是因为我的实现里 into 的结果类型不受泛型约
+束，所以没有成功。之后再考虑考虑怎么做。
+
+昨天的 &&str 调用 ToString 导致迂回调用的问题，让我想起我已知的，将 &str 转换成
+String 的方法有三种：
+
+- `s.to_string()`
+- `s.to_owned()`
+- `s.into()`
+
+我之前用第三种最多，因为打字少一点……现在看来，后两种都不太会产生第一种会出现的
+问题。
+
 ## 2020年 07月 19日 星期日 15:06:36 CST
 
 Rust 的 &str 实现了 ToString，str 也实现了 ToString，但前者是因为下面这一串实现
