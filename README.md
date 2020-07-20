@@ -2,24 +2,19 @@
 
 ## 2020年 07月 20日 星期一 17:47:45 CST
 
-我想实现一个 MapInto trait，为所有可能的情况实现 iterator.map\_into()，相当于
-iterator.map(|item| item.into())，但是因为我的实现里 into 的结果类型不受泛型约
-束，所以没有成功。之后再考虑考虑怎么做。
+我想实现一个 MapInto trait，为所有可能的情况实现 iterator.map\_into()，相当于 iterator.map(|item| item.into())，但是因为我的实现里 into 的结果类型不受泛型约束，所以没有成功。之后再考虑考虑怎么做。
 
-昨天的 &&str 调用 ToString 导致迂回调用的问题，让我想起我已知的，将 &str 转换成
-String 的方法有三种：
+昨天的 &&str 调用 ToString 导致迂回调用的问题，让我想起我已知的，将 &str 转换成 String 的方法有三种：
 
 - `s.to_string()`
 - `s.to_owned()`
 - `s.into()`
 
-我之前用第三种最多，因为打字少一点……现在看来，后两种都不太会产生第一种会出现的
-问题。
+我之前用第三种最多，因为打字少一点……现在看来，后两种都不太会产生第一种会出现的问题。
 
 ## 2020年 07月 19日 星期日 15:06:36 CST
 
-Rust 的 &str 实现了 ToString，str 也实现了 ToString，但前者是因为下面这一串实现
-。
+Rust 的 &str 实现了 ToString，str 也实现了 ToString，但前者是因为下面这一串实现。
 
 ```rust
 impl Display for str {}
@@ -27,12 +22,9 @@ impl<'_, T> Display for &'_ T where T: Display + ?Sized {}
 impl<T> ToString for T where T: Display + ?Sized {}
 ```
 
-也就是最后依赖为 str 实现的 Display::fmt 来创造字符串的。相比较而言后者的效率自
-然会更高。
+也就是最后依赖为 str 实现的 Display::fmt 来创造字符串的。相比较而言后者的效率自然会更高。
 
-例如 s 是 &&str，那么 s.to_string() 会调用 &str 的实现，为此写成
-(*s).to_string()，调用 str 的实现更好一些。cargo clippy 可以找到第一种写法，给
-出一个警告。
+例如 s 是 &&str，那么 s.to_string() 会调用 &str 的实现，为此写成 (*s).to_string()，调用 str 的实现更好一些。cargo clippy 可以找到第一种写法，给出一个警告。
 
 ## 2020年 07月 18日 星期六 19:16:54 CST
 
@@ -43,14 +35,11 @@ set -g default-command /usr/local/bin/fish
 set -g default-shell /usr/local/bin/fish
 ```
 
-注意，修改配置之后，需要关闭所有会话，新的配置才能起效。如果不在意其他会话的工
-作的话，可以用 tmux kill-server 杀死所有会话。
+注意，修改配置之后，需要关闭所有会话，新的配置才能起效。如果不在意其他会话的工作的话，可以用 tmux kill-server 杀死所有会话。
 
 ## 2020年 07月 18日 星期六 17:54:03 CST
 
-date 工具的默认格式受 locale 影响。例如当前主要语言设置的是 C，想要输出简体中文
-日期时，首先编辑 /etc/locale.gen，打开 zh_CN.UTF-8 的开关。再运行 locale-gen 工
-具，最后用 LANG 环境变量控制 date。
+date 工具的默认格式受 locale 影响。例如当前主要语言设置的是 C，想要输出简体中文日期时，首先编辑 /etc/locale.gen，打开 zh_CN.UTF-8 的开关。再运行 locale-gen 工具，最后用 LANG 环境变量控制 date。
 
 ```
 env LANG=zh_CN.UTF-8 date
