@@ -1,5 +1,9 @@
 # 日志
 
+## 2020年 07月 20日 星期二
+
+实在是对 Markdown 恼火到一定境界了。
+
 ## 2020年 07月 20日 星期一 17:47:45 CST
 
 我想实现一个 MapInto trait，为所有可能的情况实现 iterator.map\_into()，相当于 iterator.map(|item| item.into())，但是因为我的实现里 into 的结果类型不受泛型约束，所以没有成功。之后再考虑考虑怎么做。
